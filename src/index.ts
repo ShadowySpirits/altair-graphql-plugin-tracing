@@ -1,54 +1,39 @@
-import type { PluginClassInstance, PluginContext, SubscriptionProviderConstructor, SubscriptionProviderExecuteOptions } from 'altair-graphql-plugin';
-
-class FakeSubscriptionProvider {
-  execute({ query, variables, operationName }: SubscriptionProviderExecuteOptions) {
-    console.log('Executing my sub provider!');
-    // should return an Observable
-    return '' as any;
-  }
-  close() {
-    // Perform cleanup tasks here.
-  }
-}
+import { AltairPanelLocation, PluginClassInstance, PluginContext } from 'altair-exported-types/dist/app/modules/altair/services/plugin/plugin';
+import { registerPluginClass } from 'altair-graphql-plugin';
+import Vue from './components/Panel.vue';
+import Panel from './components/Panel.vue';
 
 // https://altair.sirmuel.design/docs/plugins/writing-plugin.html
-class TemplateClass implements PluginClassInstance {
+class AltairTracing implements PluginClassInstance {
   initialize(ctx: PluginContext) {
 
-    // Creating a UI panel.
     const div = document.createElement('div');
-    div.innerHTML = 'My first plugin!';
 
-    ctx.app.createPanel(div);
-
-    // Adding a custom subscription provider.
-    ctx.app.addSubscriptionProvider({
-      id: 'my-plugged-provider',
-      getProviderClass: async() => FakeSubscriptionProvider as unknown as SubscriptionProviderConstructor,
-      copyTag: 'My plugged provider',
-    });
-
-    // Creating an action button.
-    ctx.app.createAction({
-      title: 'Test',
-      execute(state) {
-        alert('First');
-        alert(`Found me!. query: ${state.query}`);
+    const app = new Vue({
+      el: '',
+      template: '<Panel :context="context" />',
+      components: { Panel },
+      propsData: {
+        context: ctx,
       }
+    }).$mount();
+    const panelComp = new Panel({
+      propsData: {
+        context: ctx,
+      }
+    }).$mount();
+
+    ctx.app.createPanel(div, {
+      location: AltairPanelLocation.RESULT_PANE_BOTTOM,
+      title: 'Tracing',
     });
 
-    // Adding a theme.
-    ctx.theme.add('new-theme', {
-      colors: {
-        primary: '#88C0D0',
-        secondary: '#8FBCBB',
-      },
-    });
-    ctx.theme.enable('new-theme');
+    // for some reason, specidying the div in $mount didnt work, so using DOM APIs instead
+    div.appendChild(panelComp.$el);
+
   }
 
-  destroy() {
-    throw new Error('Method not implemented.');
-  }
+  destroy() {}
 }
-(window as any)['AltairGraphQL'].plugins.TemplateClass = TemplateClass;
+
+registerPluginClass('AltairTracing', AltairTracing);

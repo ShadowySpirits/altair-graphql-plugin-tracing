@@ -1,5 +1,5 @@
 {
-  "name": "altair-plugin-template",
+  "name": "altair-graphql-plugin-tracing",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -9,13 +9,18 @@
   },
   "devDependencies": {
     "@snowpack/plugin-typescript": "^1.2.1",
+    "@vue/component-compiler-utils": "^3.2.0",
     "altair-exported-types": "^4.0.4",
     "http-server": "^0.12.3",
     "parcel-bundler": "^1.12.5",
     "snowpack": "^3.5.2",
-    "typescript": "^4.3.2"
+    "typescript": "^4.3.2",
+    "vue-template-compiler": "^2.6.12"
   },
   "dependencies": {
-    "altair-graphql-plugin": "^4.0.5"
+    "altair-graphql-plugin": "^4.0.6",
+    "uuid": "3.4.0",
+    "vue": "^2.6.12",
+    "vue-hot-reload-api": "^2.3.4"
   }
 }
