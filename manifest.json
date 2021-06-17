@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
   "name" : "altair-graphql-plugin-tracing",
-  "version" : "1.0.0",
-  "display_name": "Altair Plugin Template",
-  "description" : "Altair Plugin Template plugin for Altair GraphQL",
+  "version" : "1.0.1",
+  "display_name": "Apollo Tracing",
+  "description" : "Apollo tracing visualization",
   "author_email" : "altair@sirmuel.design",
   "author" : "Altair GraphQL Client",
   "plugin_class": "AltairTracing",
