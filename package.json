@@ -18,7 +18,8 @@
     "vue-template-compiler": "^2.6.12"
   },
   "dependencies": {
-    "altair-graphql-plugin": "^4.0.6",
+    "altair-graphql-core": "^4.0.11",
+    "altair-graphql-plugin": "4.0.10",
     "uuid": "3.4.0",
     "vue": "^2.6.12",
     "vue-hot-reload-api": "^2.3.4"

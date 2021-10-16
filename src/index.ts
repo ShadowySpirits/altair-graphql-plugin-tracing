@@ -1,10 +1,11 @@
-import { AltairPanelLocation, PluginClassInstance, PluginContext } from 'altair-exported-types/dist/app/modules/altair/services/plugin/plugin';
-import { registerPluginClass } from 'altair-graphql-plugin';
 import Vue from './components/Panel.vue';
+import { PluginContext } from 'altair-graphql-core/build/plugin/context/context.interface';
+import { AltairPanelLocation } from 'altair-graphql-core/build/plugin/panel';
+import { PluginBase } from 'altair-graphql-core/build/plugin/base';
 import Panel from './components/Panel.vue';
 
 // https://altair.sirmuel.design/docs/plugins/writing-plugin.html
-class AltairTracing implements PluginClassInstance {
+class AltairTracing extends PluginBase {
   initialize(ctx: PluginContext) {
 
     const div = document.createElement('div');
@@ -36,4 +37,4 @@ class AltairTracing implements PluginClassInstance {
   destroy() {}
 }
 
-registerPluginClass('AltairTracing', AltairTracing);
+(window as any)['AltairGraphQL'].plugins['AltairTracing'] = AltairTracing;
