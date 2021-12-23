@@ -114,6 +114,6 @@ export default Vue.extend({
 
 <style scoped>
   .tracing {
-    min-height: 100px;
+    min-height: 600px;
   }
 </style>
